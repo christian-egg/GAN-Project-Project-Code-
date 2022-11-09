@@ -20,6 +20,23 @@ class Generator(nn.Module):
             nn.ConvTranspose2d(Z_DIM, GEN_OUT_MULT, kernel_size=8, stride=1, padding=0, bias=False),
             nn.BatchNorm2d(GEN_OUT_MULT),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+            
+            nn.ConvTranspose2d(Z_DIM, GEN_OUT_MULT, kernel_size=8, stride=1, padding=0, bias=False),
+            nn.BatchNorm2d(GEN_OUT_MULT),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+            
+            nn.ConvTranspose2d(Z_DIM, GEN_OUT_MULT * 2, kernel_size=8, stride=1, padding=0, bias=False),
+            nn.BatchNorm2d(GEN_OUT_MULT),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+            
+            nn.ConvTranspose2d(Z_DIM, GEN_OUT_MULT * 2, kernel_size=8, stride=1, padding=0, bias=False),
+            nn.BatchNorm2d(GEN_OUT_MULT),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+
             # size (GEN_OUT_MULT) x 8 x 8
             nn.ConvTranspose2d(GEN_OUT_MULT, IMAGE_CHANNELS, kernel_size=4, stride=1, padding=0, bias=False),                     
             nn.Tanh()
@@ -41,6 +58,24 @@ class Discriminator(nn.Module):
             nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT, kernel_size=3, stride=8, padding=1, bias=False),
             nn.BatchNorm2d(DISCRIM_OUT_MULT),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+            
+            nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT, kernel_size=3, stride=8, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+
+            
+            nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT * 2, kernel_size=3, stride=8, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+
+            
+            nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT * 2, kernel_size=3, stride=8, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
             # size (GEN_OUT_MULT) x 4 x 4
             nn.Conv2d(DISCRIM_OUT_MULT, 1, kernel_size=3, stride=4, padding=1, bias=False),
             nn.Sigmoid())
