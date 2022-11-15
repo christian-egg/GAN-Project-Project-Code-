@@ -29,7 +29,11 @@ class Generator(nn.Module):
             nn.BatchNorm2d(GEN_OUT_MULT * 4),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
             
-            nn.ConvTranspose2d(GEN_OUT_MULT * 4, IMAGE_CHANNELS, kernel_size=4, stride=2, padding=1, bias=False),                     
+            nn.ConvTranspose2d(GEN_OUT_MULT * 4, GEN_OUT_MULT * 8, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(GEN_OUT_MULT * 8),
+            nn.LeakyReLU(negative_slope= 0.05, inplace = True),
+
+            nn.ConvTranspose2d(GEN_OUT_MULT * 8, IMAGE_CHANNELS, kernel_size=4, stride=2, padding=1, bias=False),                     
             nn.Tanh() 
         )
 
@@ -60,11 +64,12 @@ class Discriminator(nn.Module):
             nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=4, padding=1, bias=False),
             nn.BatchNorm2d(DISCRIM_OUT_MULT),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
-          
+
+            nn.Conv2d(DISCRIM_OUT_MULT, 1, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Sigmoid()
         )
 
 
 
     def forward(self, x):
         return self.main(x)
-
