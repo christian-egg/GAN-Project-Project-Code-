@@ -53,19 +53,19 @@ class Discriminator(nn.Module):
             nn.BatchNorm2d(DISCRIM_OUT_MULT),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
-            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=4, padding=1, bias=False),
-            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT*2, kernel_size=3, stride=4, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT*2),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
-            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=1, padding=1, bias=False),
-            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.Conv2d(DISCRIM_OUT_MULT*2, DISCRIM_OUT_MULT*4, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT*4),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
             
-            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=4, padding=1, bias=False),
-            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.Conv2d(DISCRIM_OUT_MULT*4, DISCRIM_OUT_MULT*8, kernel_size=3, stride=4, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT*8),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
-            nn.Conv2d(DISCRIM_OUT_MULT, 1, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(DISCRIM_OUT_MULT*8, 1, kernel_size=3, stride=2, padding=1, bias=False),
             nn.Sigmoid()
         )
 

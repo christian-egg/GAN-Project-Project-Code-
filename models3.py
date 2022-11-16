@@ -6,11 +6,11 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.autograd import Variable
 
-GEN_OUT_MULT = 32
+GEN_OUT_MULT = 64
 OUTPUT_DIMENSION = 32
 Z_DIM = 100
 IMAGE_CHANNELS = 3
-DISCRIM_OUT_MULT = 32
+DISCRIM_OUT_MULT = 64
 
 class Generator(nn.Module):
     def __init__(self):
@@ -57,15 +57,15 @@ class Discriminator(nn.Module):
             nn.BatchNorm2d(DISCRIM_OUT_MULT),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
-            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=1, padding=1, bias=False),
-            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT*2, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT*2),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
             
-            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=4, padding=1, bias=False),
-            nn.BatchNorm2d(DISCRIM_OUT_MULT),
+            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT*2, kernel_size=3, stride=4, padding=1, bias=False),
+            nn.BatchNorm2d(DISCRIM_OUT_MULT*2),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
             
-            nn.Conv2d(DISCRIM_OUT_MULT, 1, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(DISCRIM_OUT_MULT*2, 1, kernel_size=3, stride=2, padding=1, bias=False),
             nn.Sigmoid()
         )
 
