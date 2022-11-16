@@ -60,19 +60,19 @@ class Discriminator(nn.Module):
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
             
-            nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT, kernel_size=3, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(DISCRIM_OUT_MULT),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
 
             
-            nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT * 2, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(DISCRIM_OUT_MULT, DISCRIM_OUT_MULT * 2, kernel_size=3, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(DISCRIM_OUT_MULT*2),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
 
             
-            nn.Conv2d(IMAGE_CHANNELS, DISCRIM_OUT_MULT * 2, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(DISCRIM_OUT_MULT*2, DISCRIM_OUT_MULT * 2, kernel_size=3, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(DISCRIM_OUT_MULT*2),
             nn.LeakyReLU(negative_slope= 0.05, inplace = True),
 
